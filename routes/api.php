@@ -19,3 +19,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('groups', 'GroupController');
 Route::resource('invitations', 'InvitationController');
+
+// public routes
+Route::post('/login', 'Api\AuthController@login')->name('login.api');
+Route::post('/register', 'Api\AuthController@register')->name('register.api');
+
+// private routes
+Route::middleware('auth:api')->group(function () {
+    Route::get('/logout', 'Api\AuthController@logout')->name('logout');
+});

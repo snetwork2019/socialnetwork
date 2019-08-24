@@ -12,9 +12,10 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id = "")
+    public function index()
     {
-
+        $data=  Group::all();
+        return response()->json($data, 200);
     }
 
     /**
@@ -46,7 +47,8 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        //
+        $data = Group::find($group);
+        return response()->json($data, 200);
     }
 
     /**
@@ -57,7 +59,7 @@ class GroupController extends Controller
      */
     public function edit(Group $group)
     {
-        //
+
     }
 
     /**
@@ -69,7 +71,7 @@ class GroupController extends Controller
      */
     public function update(Request $request, Group $group)
     {
-        //
+
     }
 
     /**

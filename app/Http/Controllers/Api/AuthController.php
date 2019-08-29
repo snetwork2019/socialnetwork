@@ -57,13 +57,14 @@ class AuthController extends Controller
     }
 
     public function logout (Request $request) {
-
+        dd($request);
         $user = User::where('email', $request->email)->first();
 
         if ($user) {
 
             if (Hash::check($request->password, $user->password)) {
                 $token = $request->user()->token();
+                dd($token);
                 $token->revoke();
 
                 $response = 'You have been succesfully logged out!';

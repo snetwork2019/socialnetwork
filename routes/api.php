@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('groups', 'GroupController');
+Route::resource('/groups', 'Api\GroupController');
 Route::resource('invitations', 'InvitationController');
 
 // public routes

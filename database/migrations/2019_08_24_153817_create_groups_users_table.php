@@ -13,10 +13,10 @@ class CreateGroupsUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('groups_users', function (Blueprint $table) {
+        Schema::create('group_user', function (Blueprint $table) {
             $table->bigIncrements('id')->unique();
-            $table->bigInteger('user_id');
-            $table->bigInteger('group_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('group_id');
             $table->foreign('group_id')->references('id')->on('groups');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

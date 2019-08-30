@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Invitation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class InvitationController extends Controller
 {
@@ -14,7 +15,9 @@ class InvitationController extends Controller
      */
     public function index()
     {
-        //
+        $invitation = Invitation::all();
+
+        return response($invitation->toArray(), 200);
     }
 
     /**
@@ -35,7 +38,20 @@ class InvitationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'group_id' => 'required',
+            'user_id'  => 'required',
+        ]);
+
+        if ( $validator->fails() ) {
+            return response("Error de validacion", 400);
+        }
+
+        $invitation = Invitation::create($input);
+
+        return response("Guardado exitosamente", 200);
     }
 
     /**

@@ -27,7 +27,8 @@ class PublicationController extends Controller
     public function store(Request $request)
     {
       $publication = Publication::create([
-                'user_id'     => $request->user()->id,
+                //'user_id'     => $request->user()->id,
+                'user_id'     => $request->user_id,
                 'title'       => $request->title,
                 'description' => $request->description,
               ]);

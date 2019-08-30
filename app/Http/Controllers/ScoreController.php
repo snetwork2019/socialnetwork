@@ -13,8 +13,10 @@ class ScoreController extends Controller
     {
       $score = Score::firstOrCreate(
         [
-          'user_id' => $request->user()->id,
-          'publication_id' => $publication->id,
+          //'user_id'        => $request->user()->id,
+          'user_id'          => $request->user_id,
+          //'publication_id' => $publication->id,
+          'publication_id'   => $request->publication_id,
         ],
         ['score' => $request->score]
       );

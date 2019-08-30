@@ -17,8 +17,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('/groups', 'Api\GroupController');
+Route::resource('groups', 'GroupController');
 Route::resource('invitations', 'InvitationController');
+
+Route::apiResource('publications', 'PublicationController');
+Route::post('publications/{publication}/scores', 'ScoreController@store');
 
 // public routes
 Route::post('/login', 'Api\AuthController@login')->name('login.api');

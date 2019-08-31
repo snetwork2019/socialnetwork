@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Invitation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\User;
+
 
 class InvitationController extends Controller
 {

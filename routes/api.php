@@ -16,11 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-    
-//Route::post('/logout','UserController@logoutApi')->name('islogout');
-Route::resource('/groups', 'Api\GroupController');
-Route::resource('groups', 'GroupController');
-Route::resource('invitations', 'InvitationController');
 
 Route::apiResource('publications', 'PublicationController');
 Route::post('publications/{publication}/scores', 'ScoreController@store');
@@ -33,6 +28,8 @@ Route::post('/register', 'Api\AuthController@register')->name('register.api');
 
 // private routes
 Route::middleware('auth:api')->group(function () {
-    Route::post('/logouts', 'Api\AuthController@logout')->name('logout');
-    Route::post('/secureLogout', 'UserController@logout')->name('securelogout');
+	Route::post('/logout', 'Api\AuthController@logout');
+	Route::resource('groups', 'GroupController');
+	Route::resource('invitations', 'InvitationController');
+    
 });

@@ -85,13 +85,17 @@ class InvitationController extends Controller
      */
     public function update(Request $request, Invitation $invitation)
     {
-        $invitation->update($request->only(['status']));
 
-        if($request->only(['status'] == 1))
+      $input = $request->all();
+        if($input['status'] == 1){
+          $invitation->status = 1;
+          $invitation->save($input);
           $validateStatus = response()->json("Invitación aceptada", 200);
-        else
+        }else{
+          $invitation->status = 2;
+          $invitation->save($input);
           $validateStatus = response()->json("Invitacion rechazada", 200);
-
+        }
         return $validateStatus;
     }
 

@@ -8,11 +8,12 @@ class Invitation extends Model
 {
     protected $fillable = [
         'group_id',
-        'user_id'
+        'user_id',
+        'status'
     ];
 
     /**
-     * 
+     *
      *
      * @return \Illuminate\Http\Response
      */

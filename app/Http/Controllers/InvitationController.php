@@ -13,10 +13,10 @@ class InvitationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $invitation = Invitation::all();
-
+        $userId = $request->user()->id;
+        $invitation = Invitation::where("user_id", $userId)->get();
         return response($invitation->toArray(), 200);
     }
 
@@ -39,18 +39,14 @@ class InvitationController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-
         $validator = Validator::make($input, [
             'group_id' => 'required',
             'user_id'  => 'required',
         ]);
-
         if ( $validator->fails() ) {
             return response("Error de validacion", 400);
         }
-
         $invitation = Invitation::create($input);
-
         return response("Guardado exitosamente", 200);
     }
 

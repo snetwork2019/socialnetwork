@@ -17,8 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('groups', 'GroupController');
-Route::resource('invitations', 'InvitationController');
+
+
 
 Route::apiResource('publications', 'PublicationController');
 Route::post('publications/{publication}/scores', 'ScoreController@store');
@@ -32,4 +32,6 @@ Route::post('/register', 'Api\AuthController@register')->name('register.api');
 // private routes
 Route::middleware('auth:api')->group(function () {
     Route::post('/logout', 'Api\AuthController@logout')->name('logout');
+    Route::resource('invitations', 'InvitationController');
+    Route::resource('groups', 'GroupController');
 });

@@ -19,7 +19,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     
 //Route::post('/logout','UserController@logoutApi')->name('islogout');
 Route::resource('/groups', 'Api\GroupController');
+Route::resource('groups', 'GroupController');
 Route::resource('invitations', 'InvitationController');
+
+Route::apiResource('publications', 'PublicationController');
+Route::post('publications/{publication}/scores', 'ScoreController@store');
+
+Route::post('scores', 'ScoreController@store');
 
 // public routes
 Route::post('/login', 'Api\AuthController@login')->name('login.api');

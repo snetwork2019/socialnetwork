@@ -38,4 +38,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Show publications.
+     *
+     * @return \Illuminate\Http\Response
+     */
+     public function publication()
+     {
+       return $this->hasMany(Publication::class);
+     }
 }

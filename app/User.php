@@ -48,4 +48,14 @@ class User extends Authenticatable
      {
        return $this->hasMany(Publication::class);
      }
+
+     /**
+      *
+      *
+      * @return \Illuminate\Http\Response
+      */
+      public function invitation()
+      {
+        return $this->hasMany(Invitation::class);
+      }
 }

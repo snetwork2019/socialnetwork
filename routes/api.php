@@ -31,6 +31,8 @@ Route::post('/register', 'Api\AuthController@register')->name('register.api');
 
 // private routes
 Route::middleware('auth:api')->group(function () {
+    Route::resource('groups', 'GroupController');
+    Route::resource('invitations', 'InvitationController');
     Route::post('/logout', 'Api\AuthController@logout')->name('logout');
     Route::resource('invitations', 'InvitationController');
     Route::resource('groups', 'GroupController');

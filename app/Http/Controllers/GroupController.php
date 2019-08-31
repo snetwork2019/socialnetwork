@@ -38,14 +38,15 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
+        $owner = $request->user()->id;
         $input    = $request->all();
         $validate = Validator::make($input, [
             'name'     => 'required|string|max:255',
-            'owner_id' => 'required|max:255'
         ]);
         if( $validate->fails() ){
             return response()->json("Error", 401);
         }
+        $input['owner_id'] = $owner;
         Group::create($input);
         return response()->json("Grupo creado exitosamente", 200);
     }

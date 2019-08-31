@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class GroupController extends Controller
 {
@@ -12,10 +14,10 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data=  Group::all();
-        return response()->json($data, 200);
+        $data = Group::all();
+        return response()->json($request->user(), 200);
     }
 
     /**
@@ -36,7 +38,16 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input    = $request->all();
+        $validate = Validator::make($input, [
+            'name'     => 'required|string|max:255',
+            'owner_id' => 'required|max:255'
+        ]);
+        if( $validate->fails() ){
+            return response()->json("Error", 401);
+        }
+        Group::create($input);
+        return response()->json("Grupo creado exitosamente", 200);
     }
 
     /**
@@ -71,7 +82,20 @@ class GroupController extends Controller
      */
     public function update(Request $request, Group $group)
     {
+        $input    = $request->all();
+        $validate = Validator::make($input, [
+            'name'     => 'required|string|max:255',
+            'owner_id' => 'required|max:255'
+        ]);
 
+        if( $validate->fails() ){
+            return response()->json("Error", 401);
+        }
+        Group::where("id", $group->id)->update([
+            "name"     => $input["name"],
+            "owner_id" => $input["owner_id"]
+        ]);
+        return response()->json("Grupo editado exitosamente", 200);
     }
 
     /**

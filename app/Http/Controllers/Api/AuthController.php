@@ -57,27 +57,10 @@ class AuthController extends Controller
     }
 
     public function logout (Request $request) {
+        //dd($request->user());
+        $token = $request->user()->token()->revoke();
 
-        $user = User::where('email', $request->email)->first();
-
-        if ($user) {
-
-            if (Hash::check($request->password, $user->password)) {
-                $token = $request->user()->token();
-                $token->revoke();
-
-                $response = 'You have been succesfully logged out!';
-                return response($response, 200);
-            } else {
-                $response = "Password missmatch";
-                return response($response, 422);
-            }
-
-        } else {
-            $response = 'User does not exist';
-            return response($response, 422);
-        }
-
-
+        $response = 'You have been succesfully logged out!';
+        return response($response, 200);
     }
 }
